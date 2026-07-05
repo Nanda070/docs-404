@@ -6,13 +6,30 @@
     <title>ChetBot — Официальная документация</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --text-color: #e2e8f0;
-            --sidebar-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --border-color: #334155;
-            --code-bg: #0b1120;
-            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            /* Палитра Deep Dark */
+            --bg-color: #050505;
+            --sidebar-bg: #0a0a0a;
+            --border-color: #1f1f22;
+            
+            /* Текст */
+            --text-main: #a1a1aa;
+            --text-bright: #ededed;
+            --text-muted: #71717a;
+            
+            /* Акценты */
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-bg: rgba(59, 130, 246, 0.1);
+            
+            /* Элементы */
+            --code-bg: #000000;
+            --code-border: #27272a;
+            
+            --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -24,10 +41,11 @@
         body {
             font-family: var(--font-main);
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            color: var(--text-main);
+            line-height: 1.7;
             display: flex;
             min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Sidebar */
@@ -35,17 +53,19 @@
             width: 280px;
             background-color: var(--sidebar-bg);
             border-right: 1px solid var(--border-color);
-            padding: 2rem 1.5rem;
+            padding: 2.5rem 1.5rem;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
         }
 
         aside h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #fff;
-            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--text-bright);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         aside ul {
@@ -53,110 +73,143 @@
         }
 
         aside li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.85rem;
         }
 
         aside a {
-            color: #94a3b8;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.95rem;
-            transition: color 0.2s;
+            font-weight: 500;
+            transition: all 0.2s ease;
             display: block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
         }
 
         aside a:hover {
-            color: var(--accent-color);
+            color: var(--text-bright);
+            background-color: var(--border-color);
         }
 
         /* Main Content */
         main {
             flex: 1;
             margin-left: 280px;
-            padding: 3rem 4rem;
-            max-width: 900px;
+            padding: 4rem 5rem;
+            max-width: 1000px;
         }
 
         h1, h2, h3 {
-            color: #fff;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+            color: var(--text-bright);
             font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
         }
 
-        h1 { font-size: 2.25rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 0; }
-        h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3rem; margin-top: 2.5rem; }
-        h3 { font-size: 1.25rem; }
+        h1 { 
+            font-size: 2.5rem; 
+            margin-top: 0; 
+            letter-spacing: -0.02em;
+        }
 
-        p { margin-bottom: 1rem; }
+        h2 { 
+            font-size: 1.75rem; 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 0.5rem; 
+            margin-top: 3.5rem; 
+        }
+
+        h3 { 
+            font-size: 1.25rem; 
+            color: var(--text-bright);
+        }
+
+        p { margin-bottom: 1.25rem; }
 
         ul, ol {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             padding-left: 1.5rem;
         }
 
         li { margin-bottom: 0.5rem; }
 
         a {
-            color: var(--accent-color);
+            color: var(--accent);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
 
-        a:hover { text-decoration: underline; }
+        a:hover { color: var(--accent-hover); }
 
         hr {
             border: 0;
             border-top: 1px solid var(--border-color);
-            margin: 2rem 0;
+            margin: 3rem 0;
         }
 
         /* Blockquote */
         blockquote {
-            background-color: rgba(56, 189, 248, 0.1);
-            border-left: 4px solid var(--accent-color);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 0 4px 4px 0;
+            background-color: var(--accent-bg);
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-bright);
+            font-size: 0.95rem;
         }
 
         /* Code */
         code {
             background-color: var(--code-bg);
+            border: 1px solid var(--code-border);
             padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: Consolas, Monaco, monospace;
-            font-size: 0.9em;
-            color: #38bdf8;
+            border-radius: 6px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.85em;
+            color: var(--accent-hover);
         }
 
         pre {
             background-color: var(--code-bg);
-            padding: 1rem;
-            border-radius: 6px;
+            padding: 1.25rem;
+            border-radius: 8px;
             overflow-x: auto;
-            margin-bottom: 1rem;
-            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--code-border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
         }
 
         pre code {
             background-color: transparent;
+            border: none;
             padding: 0;
-            color: #e2e8f0;
+            color: #d4d4d8;
+            font-size: 0.9em;
         }
 
         /* Table */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 1rem;
+            margin: 2rem 0;
+            font-size: 0.95rem;
         }
 
         th, td {
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
             text-align: left;
         }
 
-        th { background-color: var(--sidebar-bg); }
+        th { 
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        tr:hover td {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -179,17 +232,17 @@
 <body>
 
     <aside>
-        <h2>ChetBot Docs</h2>
+        <h2>ChetBot</h2>
         <nav>
             <ul>
                 <li><a href="#intro">1. Введение</a></li>
-                <li><a href="#dashboard">2. Начало работы с Дашбордом</a></li>
-                <li><a href="#moderation">3. Модули: Модерация и Логи</a></li>
-                <li><a href="#interaction">4. Модули: Взаимодействие</a></li>
-                <li><a href="#tickets">5. Модули: Тикеты (CTD)</a></li>
+                <li><a href="#dashboard">2. Начало работы</a></li>
+                <li><a href="#moderation">3. Модерация и Логи</a></li>
+                <li><a href="#interaction">4. Взаимодействие</a></li>
+                <li><a href="#tickets">5. Тикеты (CTD)</a></li>
                 <li><a href="#exclusive">6. Уникальные функции</a></li>
-                <li><a href="#commands">7. Список команд бота</a></li>
-                <li><a href="#developer">8. Для разработчиков</a></li>
+                <li><a href="#commands">7. Команды бота</a></li>
+                <li><a href="#developer">8. Разработчикам</a></li>
             </ul>
         </nav>
     </aside>
@@ -437,19 +490,8 @@ cd ../..</code></pre>
         </section>
         
         <hr>
-        <p style="text-align: center; color: #94a3b8; font-size: 0.9em;"><em>Документация ChetBot. Создано для идеального администрирования.</em></p>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9em;"><em>Документация ChetBot. Создано для идеального администрирования.</em></p>
     </main>
 
-    <script>
-        // Простая плавная прокрутка для якорных ссылок в сайдбаре
-        document.querySelectorAll('aside a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
