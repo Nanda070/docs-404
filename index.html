@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChetBot — Официальная документация</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --sidebar-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --border-color: #334155;
+            --code-bg: #0b1120;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        aside {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        aside h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        aside ul {
+            list-style: none;
+        }
+
+        aside li {
+            margin-bottom: 0.75rem;
+        }
+
+        aside a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            display: block;
+        }
+
+        aside a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            margin-left: 280px;
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
+        h1, h2, h3 {
+            color: #fff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        h1 { font-size: 2.25rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 0; }
+        h2 { font-size: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3rem; margin-top: 2.5rem; }
+        h3 { font-size: 1.25rem; }
+
+        p { margin-bottom: 1rem; }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li { margin-bottom: 0.5rem; }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover { text-decoration: underline; }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+
+        /* Blockquote */
+        blockquote {
+            background-color: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Code */
+        code {
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: Consolas, Monaco, monospace;
+            font-size: 0.9em;
+            color: #38bdf8;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #e2e8f0;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th { background-color: var(--sidebar-bg); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            aside {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 1.5rem;
+            }
+            main {
+                margin-left: 0;
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside>
+        <h2>ChetBot Docs</h2>
+        <nav>
+            <ul>
+                <li><a href="#intro">1. Введение</a></li>
+                <li><a href="#dashboard">2. Начало работы с Дашбордом</a></li>
+                <li><a href="#moderation">3. Модули: Модерация и Логи</a></li>
+                <li><a href="#interaction">4. Модули: Взаимодействие</a></li>
+                <li><a href="#tickets">5. Модули: Тикеты (CTD)</a></li>
+                <li><a href="#exclusive">6. Уникальные функции</a></li>
+                <li><a href="#commands">7. Список команд бота</a></li>
+                <li><a href="#developer">8. Для разработчиков</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <h1>Полное руководство по ChetBot</h1>
+        <p>Добро пожаловать в официальную документацию <strong>ChetBot</strong>! Эта документация создана для того, чтобы помочь вам настроить бота на вашем сервере, использовать его веб-дашборд и максимально раскрыть его потенциал.</p>
+
+        <section id="intro">
+            <h2>1. Введение</h2>
+            <h3>Что такое ChetBot?</h3>
+            <p>ChetBot — это многоцелевой Discord-бот премиум-класса, разработанный для того, чтобы полностью автоматизировать рутину на вашем сервере. Подобно передовым решениям (таким как ProBot, Dyno или Carl-bot), мы сделали упор на <strong>Web Dashboard</strong> — мощную панель управления в браузере, благодаря которой вам больше не нужно запоминать сотни команд.</p>
+            
+            <h3>Главные преимущества:</h3>
+            <ul>
+                <li>🌐 <strong>Универсальный Дашборд:</strong> Настраивайте всё через красивый и понятный интерфейс (React + Vite).</li>
+                <li>⚡ <strong>Высокая производительность:</strong> Бэкенд на <code>aiohttp</code> гарантирует, что изменения на сайте мгновенно применяются на вашем сервере без перезагрузок.</li>
+                <li>🛡️ <strong>Продвинутая защита:</strong> Инструменты модерации, включая режим "Lockdown" (Изоляция) и анти-спам, защитят ваш сервер от рейдов.</li>
+                <li>🎫 <strong>Встроенные Тикеты (CTD):</strong> Поддержка пользователей через приватные ветки (Threads) с авто-закрытием неактивных обращений.</li>
+                <li>🏆 <strong>Турнирные сетки:</strong> Уникальный модуль для генерации сеток "Single Elimination".</li>
+                <li>🎨 <strong>Embed Builder:</strong> Создание шикарных Embed-сообщений без знания JSON.</li>
+            </ul>
+        </section>
+
+        <section id="dashboard">
+            <h2>2. Начало работы с Дашбордом</h2>
+            <p>Взаимодействие с ChetBot на 90% происходит через веб-дашборд.</p>
+            
+            <h3>Как войти в панель?</h3>
+            <ol>
+                <li>Перейдите по ссылке вашего дашборда (например, <a href="https://cheterin.online" target="_blank">cheterin.online</a>).</li>
+                <li>Нажмите кнопку <strong>"Login with Discord"</strong>.</li>
+                <li>Вы будете перенаправлены на официальную страницу авторизации Discord. Разрешите приложению доступ к вашему профилю.</li>
+                <li>После успешного входа вы попадете на главную страницу управления сервером.</li>
+            </ol>
+
+            <blockquote>
+                <strong>ℹ️ Кто имеет доступ?</strong><br>
+                Бот автоматически проверяет ваши права на сервере. Только пользователи с правами администратора (или специально указанными ролями) могут изменять настройки.
+            </blockquote>
+
+            <h3>Навигация по панели</h3>
+            <p>В левом меню вы найдете все необходимые модули:</p>
+            <ul>
+                <li><strong>Overview / Config:</strong> Базовые настройки, выбор каналов для логов.</li>
+                <li><strong>Members:</strong> Список участников и массовая выдача ролей.</li>
+                <li><strong>Embed Builder:</strong> Создание сообщений.</li>
+                <li><strong>Modules:</strong> Включение и настройка отдельных функций (Анти-спам, Приветствия и т.д.).</li>
+                <li><strong>Brackets:</strong> Управление турнирами.</li>
+            </ul>
+        </section>
+
+        <section id="moderation">
+            <h2>3. Модули: Модерация и Логи</h2>
+            <p>ChetBot предлагает надежную систему модерации для поддержания порядка.</p>
+
+            <h3>🛡️ Анти-Спам (Spam Protection)</h3>
+            <p>Модуль автоматически анализирует поток сообщений на сервере.</p>
+            <ul>
+                <li><strong>Как работает:</strong> При обнаружении флуда (слишком много сообщений за короткое время от одного пользователя), бот удаляет эти сообщения.</li>
+                <li><strong>Наказание:</strong> Нарушителю автоматически выдается роль, указанная в переменной <code>SPAM_LOG_ROLE_ID</code> (обычно это роль Muted, запрещающая отправку сообщений).</li>
+                <li><strong>Исключения:</strong> В дашборде вы можете указать каналы в <code>SPAM_EXCEPTION_CHANNELS</code>. В этих каналах бот не будет наказывать за спам (удобно для каналов с бот-командами).</li>
+            </ul>
+
+            <h3>🛑 Временные баны (Tempban)</h3>
+            <p>Вместо перманентной блокировки, вы можете дать пользователю время на раздумья.</p>
+            <ul>
+                <li>Выдайте временный бан через панель или команду.</li>
+                <li>Бот зафиксирует время снятия бана.</li>
+                <li>Как только срок истечет, бот <strong>самостоятельно</strong> разбанит пользователя и отправит отчет в лог-канал <code>TEMPBAN_CHANNEL_ID</code>.</li>
+            </ul>
+
+            <h3>🔒 Изоляция сервера (Lockdown)</h3>
+            <p>В случае массовой атаки (рейд ботов) используйте этот режим.</p>
+            <ul>
+                <li>Введите команду <code>/antispam</code> или включите Lockdown в панели.</li>
+                <li>Бот мгновенно переопределит права для роли <code>@everyone</code> во всех текстовых каналах, запретив отправку сообщений.</li>
+                <li>После окончания рейда, вы отключаете режим, и права возвращаются в исходное состояние.</li>
+            </ul>
+
+            <h3>📝 Журнал аудита (Audit Logging)</h3>
+            <p>ChetBot фиксирует всё! Выберите канал <code>LOG_CHANNEL_ID</code> в панели конфигурации, и бот будет отправлять туда:</p>
+            <ul>
+                <li>Удаленные сообщения (с содержимым).</li>
+                <li>Измененные сообщения (До / После).</li>
+                <li>Входы и выходы участников.</li>
+                <li>Действия модераторов (выдача ролей, баны, закрытие тикетов).</li>
+            </ul>
+        </section>
+
+        <section id="interaction">
+            <h2>4. Модули: Взаимодействие (Roles & Welcome)</h2>
+
+            <h3>👋 Приветствия (Welcome)</h3>
+            <p>Встречают по одежке. Сделайте так, чтобы каждый новый участник чувствовал себя особенным.</p>
+            <ol>
+                <li>Зайдите в дашборд -> <strong>Welcome</strong>.</li>
+                <li>Выберите канал для приветствий (<code>WELCOME_CHANNEL_ID</code>).</li>
+                <li>Настройте текст сообщения (поддерживаются переменные, такие как упоминание пользователя <code>{user}</code> или количество участников <code>{member_count}</code>).</li>
+                <li>Бот также может отправлять прощальные сообщения при выходе человека с сервера.</li>
+            </ol>
+
+            <h3>🤖 Автороли (AutoRoles)</h3>
+            <p>Избавьтесь от ручной выдачи базовых ролей.</p>
+            <ul>
+                <li>Перейдите в раздел <strong>AutoRoles</strong>.</li>
+                <li>Выберите одну или несколько ролей из списка.</li>
+                <li>Теперь, как только пользователь присоединится к серверу, ChetBot мгновенно выдаст ему эти роли.</li>
+            </ul>
+
+            <h3>🎭 Роли по реакциям (Reaction Roles)</h3>
+            <p>Создайте меню самовыдачи ролей.</p>
+            <ol>
+                <li>В дашборде перейдите в <strong>Reaction Roles</strong>.</li>
+                <li>Укажите ID сообщения (вы можете создать его заранее через Embed Builder).</li>
+                <li>Привяжите эмодзи к конкретной роли.</li>
+                <li>Готово! Пользователь ставит реакцию — бот выдает роль. Убирает реакцию — бот забирает роль.</li>
+            </ol>
+        </section>
+
+        <section id="tickets">
+            <h2>5. Модули: Тикеты и Обратная связь</h2>
+
+            <h3>🎫 Система обращений (CTD - Contact The Developer)</h3>
+            <p>Идеально для серверов, где игрокам нужна приватная поддержка администрации.</p>
+
+            <p><strong>Установка панели:</strong></p>
+            <ol>
+                <li>Администратор использует слеш-команду <code>/ctd_setup</code> в специальном текстовом канале (например, <code>#поддержка</code>).</li>
+                <li>Бот отправит красивое Embed-сообщение с кнопкой <strong>"Создать Тикет"</strong>.</li>
+            </ol>
+
+            <p><strong>Как это работает:</strong></p>
+            <ul>
+                <li>Пользователь жмет кнопку.</li>
+                <li>Бот создает <strong>приватную ветку (Thread)</strong>.</li>
+                <li>В эту ветку автоматически приглашается создатель и все пользователи с ролью поддержки (<code>CTD_ROLE_ID</code>).</li>
+                <li>Никто другой не видит переписку!</li>
+            </ul>
+
+            <p><strong>Авто-управление (Умное закрытие):</strong></p>
+            <ul>
+                <li>Если в тикете тишина 48 часов, бот пишет предупреждение: <em>"Тикет неактивен..."</em></li>
+                <li>Если тишина длится еще 24 часа — бот <strong>автоматически закрывает и архивирует ветку</strong>.</li>
+                <li>Модератор может закрыть тикет мгновенно нажатием красной кнопки внутри ветки.</li>
+            </ul>
+        </section>
+
+        <section id="exclusive">
+            <h2>6. Уникальные функции (Эксклюзив)</h2>
+
+            <h3>🏆 Турнирные сетки (Brackets)</h3>
+            <p>Если ваш сервер проводит киберспортивные или фановые турниры, ChetBot заменит вам сторонние сайты вроде Challonge.</p>
+            <ol>
+                <li><strong>Создание:</strong> В дашборде (раздел Brackets) вы нажимаете "Создать сетку".</li>
+                <li><strong>Участники:</strong> Добавляете список участников (ники игроков или названия команд).</li>
+                <li><strong>Генерация:</strong> Бот автоматически строит сетку <em>Single Elimination</em> с правильным сидированием (алгоритм обхода Byes для нечетного числа игроков).</li>
+                <li><strong>Управление матчами:</strong> Администратор кликает по победителю матча в браузере, и он проходит в следующий раунд.</li>
+                <li><strong>Публичная ссылка:</strong> Бот генерирует Public URL, который вы можете скинуть игрокам. Они будут видеть турнирную таблицу в реальном времени (без прав на ее изменение).</li>
+            </ol>
+
+            <h3>🎨 Embed Builder (Конструктор сообщений)</h3>
+            <p>Создавайте потрясающие анонсы, правила сервера или гайды прямо в браузере.</p>
+            <ul>
+                <li><strong>Интерфейс WYSIWYG:</strong> Вы видите изменения в реальном времени.</li>
+                <li><strong>Возможности:</strong> Настройка цвета полоски (HEX), добавление автора, иконок, заголовка, тела текста, изображений (Thumbnail и Large Image) и футера.</li>
+                <li><strong>Интеграция:</strong> Можно добавлять кнопки к сообщению.</li>
+                <li><strong>Отправка:</strong> Выберите канал в выпадающем списке и нажмите "Отправить". Сообщение появится в Discord от имени бота мгновенно.</li>
+            </ul>
+
+            <h3>👥 Массовая выдача ролей (Mass Role Assignment)</h3>
+            <p>Нужно наградить 100 участников ивента ролью?<br>
+            В разделе <strong>Members</strong> выберите нужных пользователей галочками, нажмите "Выдать роль" и выберите роль. ChetBot запустит фоновую задачу, которая обойдет ограничения Discord API и безопасно выдаст роли всем выбранным людям, сгенерировав отчет по итогу.</p>
+        </section>
+
+        <section id="commands">
+            <h2>7. Список команд бота (Commands)</h2>
+            <p>ChetBot спроектирован так, чтобы минимизировать использование команд в чате. Тем не менее, некоторые функции удобнее вызывать из Discord:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Команда</th>
+                        <th>Описание</th>
+                        <th>Требуемые права</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/ctd_setup</code></td>
+                        <td>Развернуть панель создания тикетов (CTD) в текущем канале.</td>
+                        <td><code>Управление сервером</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/antispam</code></td>
+                        <td>Быстрый переключатель режима защиты/изоляции ролей.</td>
+                        <td><code>Управление сервером</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/userinfo</code></td>
+                        <td>Выводит подробную сводку о пользователе (даты регистрации, входа, роли).</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="developer">
+            <h2>8. Для разработчиков (Self-Hosting)</h2>
+            <p>Хотите запустить ChetBot на своем оборудовании? Следуйте этим шагам.</p>
+
+            <h3>Требования</h3>
+            <ul>
+                <li><strong>Python 3.10+</strong> (Рекомендуется 3.11)</li>
+                <li><strong>Node.js LTS</strong> (Для фронтенда)</li>
+            </ul>
+
+            <h3>Шаг 1. Клонирование и зависимости</h3>
+<pre><code>git clone https://github.com/Nanda070/Cheterin_Bot_Dashboard.git
+cd Cheterin_Bot_Dashboard
+python -m venv venv
+source venv/bin/activate  # на Windows: venv\Scripts\activate
+pip install -r requirements.txt</code></pre>
+
+            <h3>Шаг 2. Конфигурация (.env)</h3>
+            <p>Создайте файл <code>.env</code> в корне проекта:</p>
+<pre><code>BOT_TOKEN=Твой_Токен_Из_Discord_Developer_Portal
+GUILD_ID=ID_Сервера
+DISCORD_OAUTH_REDIRECT_URI=http://localhost:8080/api/auth/discord/callback</code></pre>
+            
+            <blockquote>
+                <strong>Внимание!</strong> Обязательно добавьте <code>http://localhost:8080/api/auth/discord/callback</code> в список <strong>Redirect URIs</strong> в настройках вашего бота на портале Discord! Без этого вход в дашборд не будет работать.
+            </blockquote>
+
+            <h3>Шаг 3. Сборка дашборда</h3>
+<pre><code>cd dashboard/frontend
+npm install
+npm run build
+cd ../..</code></pre>
+
+            <h3>Шаг 4. Запуск</h3>
+<pre><code>python main.py</code></pre>
+            <p>Откройте браузер и перейдите по адресу <code>http://localhost:8080</code>.</p>
+            <p><em>(Подробные инструкции по деплою на Linux Ubuntu (VPS) с использованием Nginx и Certbot находятся в файле <code>DEPLOY.md</code> в корне репозитория).</em></p>
+        </section>
+        
+        <hr>
+        <p style="text-align: center; color: #94a3b8; font-size: 0.9em;"><em>Документация ChetBot. Создано для идеального администрирования.</em></p>
+    </main>
+
+    <script>
+        // Простая плавная прокрутка для якорных ссылок в сайдбаре
+        document.querySelectorAll('aside a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
